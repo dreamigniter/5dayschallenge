@@ -1,4 +1,281 @@
 <!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
-<!-- ... (เนื้อหาตามที่ผมส่งไว้ข้างต้น) ... -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamIgniter - 5-Day Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .cta-button { transition: all 0.3s ease; }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <main class="mx-auto max-w-4xl">
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-16 px-6">
+            <img src="assets/dreamigniter-logo.jpg" alt="DreamIgniter Logo" class="mx-auto h-32 md:h-40 w-auto mb-8">
+            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+                Challenge 5 วัน ที่จะพาคุณสร้างธุรกิจจากศูนย์ แม้ไม่มีทุนและประสบการณ์
+            </p>
+            <a href="https://gemini.google.com/share/de92a1ef86b5" class="cta-button inline-block bg-orange-500 text-white font-bold text-xl px-10 py-4 rounded-lg shadow-lg">เข้าร่วม Challenge ฟรี!</a>
+        </section>
+        <!-- Problem/Agitation Section -->
+        <section id="problems" class="py-16 px-6 bg-white rounded-xl shadow-sm">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">คุณเป็นแบบนี้อยู่ใช่ไหม?</h2>
+                <p class="text-md text-gray-500">ส่วนนี้จะช่วยให้ผู้เข้าร่วมเห็นภาพปัญหาที่พวกเขากำลังเผชิญอยู่ และทำให้รู้สึกว่า Challenge ของเราถูกสร้างมาเพื่อพวกเขาโดยเฉพาะ</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-lg flex items-start space-x-4">
+                    <span class="text-orange-500 text-2xl font-bold">✓</span>
+                    <p class="text-gray-700">อยากมีธุรกิจของตัวเอง แต่ไม่รู้จะเริ่มยังไง?</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg flex items-start space-x-4">
+                    <span class="text-orange-500 text-2xl font-bold">✓</span>
+                    <p class="text-gray-700">มีความคิดดีๆ แต่กลัวไม่มีเงินทุน?</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg flex items-start space-x-4">
+                    <span class="text-orange-500 text-2xl font-bold">✓</span>
+                    <p class="text-gray-700">ทำงานประจำจนหมดไฟ อยากสร้างอะไรที่เป็นของตัวเอง?</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg flex items-start space-x-4">
+                    <span class="text-orange-500 text-2xl font-bold">✓</span>
+                    <p class="text-gray-700">เรียนไปก็กังวลไป จบมาจะทำอะไรดี?</p>
+                </div>
+            </div>
+        </section>
+        <!-- Gemini API Feature Section -->
+        <section id="gemini-idea-lab" class="py-16 px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">✨ ทดลองระดมไอเดียธุรกิจของคุณกับ AI</h2>
+                <p class="text-md text-gray-500 max-w-2xl mx-auto">ไม่แน่ใจว่าไอเดียของคุณดีพอไหม? ลองให้ AI ผู้ช่วยของเราช่วยวิเคราะห์จุดแข็ง, จุดอ่อน และแนะนำก้าวแรกให้สิ!</p>
+            </div>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <div class="space-y-4">
+                    <a href="https://gemini.google.com/share/de92a1ef86b5">
+                        <img src="assets/dreamigniter-logo.jpg" alt="DreamIgniter Logo" class="mx-auto h-24 w-auto mb-6">
+                    </a>
+                    <div>
+                        <label for="business-idea" class="block text-sm font-medium text-gray-700 mb-1">อธิบายไอเดียธุรกิจของคุณสั้นๆ:</label>
+                        <textarea id="business-idea" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="เช่น 'ร้านกาแฟเดลิเวอรี่สำหรับคนทำงานกลางคืน' หรือ 'แอปสอนภาษาไทยให้ชาวต่างชาติผ่านเกม'"></textarea>
+                    </div>
+                    <button id="analyze-button" class="w-full cta-button bg-blue-800 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800 shadow-md text-lg">
+                        วิเคราะห์ไอเดีย
+                    </button>
+                </div>
+                <div id="loader" class="hidden text-center py-6">
+                    <svg class="animate-spin h-8 w-8 text-blue-800 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="mt-2 text-gray-600">กำลังวิเคราะห์... โปรดรอสักครู่</p>
+                </div>
+                <div id="gemini-result" class="mt-6 border-t pt-6 border-gray-200 hidden"></div>
+            </div>
+        </section>
+        <!-- Solution & Value Section -->
+        <section id="solution" class="py-16 px-6 bg-white rounded-xl shadow-sm">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Challenge นี้คือคำตอบสำหรับคุณ</h2>
+                <p class="text-md text-gray-500">เราได้ออกแบบเส้นทาง 5 วันที่จะเปลี่ยนคุณจากคนที่มีแค่ไอเดีย ให้กลายเป็นเจ้าของธุรกิจที่พร้อมจะก้าวไปข้างหน้าอย่างมั่นใจ</p>
+            </div>
+            <div class="max-w-2xl mx-auto space-y-4 accordion-container">
+                <!-- ...Accordion content remains unchanged... -->
+            </div>
+        </section>
+        <!-- Bonus Section -->
+        <section id="bonuses" class="py-16 px-6 bg-gray-50 rounded-xl shadow-sm">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">โบนัสพิเศษ!</h2>
+                <p class="text-md text-gray-500">สำหรับผู้ที่ลงทะเบียนตอนนี้ เรารู้ว่าการเริ่มต้นต้องการแรงสนับสนุนมากกว่าแค่ความรู้ เราจึงมอบของขวัญพิเศษเพื่อช่วยให้เส้นทางของคุณง่ายขึ้น</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 max-w-3xl mx-auto items-center">
+                <div>
+                     <img src="assets/ebook-cover.png" alt="E-book Bonus" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Bonus 1: E-book "เริ่มต้นธุรกิจ อย่างคนไม่มีทุน และ ไม่รู้จะเริ่มต้นอย่างไร ต้องรู้อะไรก่อน (บ้าง)"</h3>
+                        <p class="text-gray-600">บทพิเศษจากหนังสือขายดี ที่จะเปิดเผยเคล็ดลับการสร้างธุรกิจจากศูนย์</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Bonus 2: Checklist "10 สิ่งที่ต้องทำก่อนเปิดตัว"</h3>
+                        <p class="text-gray-600">เครื่องมือที่จะช่วยให้คุณไม่พลาดขั้นตอนสำคัญในการเปิดตัวธุรกิจแรก</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Bonus 3: สิทธิ์เข้ากลุ่ม "DreamIgniter Community"</h3>
+                        <p class="text-gray-600">เข้าร่วมชุมชนของคนมีฝัน เพื่อปรึกษา หาเพื่อนร่วมทาง และรับการสนับสนุน</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Credibility/Authority -->
+        <section id="instructor" class="py-16 px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">ผู้สอนของคุณ</h2>
+                <p class="text-md text-gray-500">ทำความรู้จักกับคนที่จะนำทางคุณตลอด 5 วันนี้ ผู้ที่ไม่ใช่แค่สอนทฤษฎี แต่คือคนที่ลงมือทำจริง</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-10 max-w-3xl mx-auto">
+                <img src="assets/dreamigniter-logo.jpg" alt="DreamIgniter Logo" class="w-48 h-auto rounded-lg shadow-lg">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">พี่คิง - ผู้ก่อตั้ง DreamIgniter</h3>
+                    <p class="text-gray-600">
+                        จากพนักงานประจำที่เคยหมดไฟ สู่การเป็นเจ้าของธุรกิจและนักเขียนหนังสือ  "เริ่มต้นธุรกิจ อย่างคนไม่มีทุน และ ไม่รู้จะเริ่มต้นอย่างไร ต้องรู้อะไรก่อน (บ้าง)"
+                        พี่คิงเข้าใจทุกปัญหาของคนอยากเริ่มต้น และสร้าง DreamIgniter ขึ้นมาเพื่อเป็นสะพานเชื่อมให้ทุกคนสามารถเปลี่ยนความฝันให้เป็นจริงได้ ภารกิจของพี่คือการพิสูจน์ให้เห็นว่าทุกคนสามารถสร้างธุรกิจของตัวเองได้ แม้จะไม่มีแต้มต่อในชีวิตก็ตาม
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Social Proof / Testimonials -->
+        <section id="testimonials" class="py-16 px-6 bg-white rounded-xl shadow-sm">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">เสียงตอบรับจากผู้เข้าร่วม</h2>
+                <p class="text-md text-gray-500">นี่คือสิ่งที่คนอื่นๆ พูดถึงเรา มาดูกันว่าพวกเขาได้อะไรจากการเดินทางร่วมกับ DreamIgniter</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 italic mb-4">"เนื้อหาเข้าใจง่ายมากค่ะ จากที่ไม่รู้อะไรเลย ตอนนี้มองเห็นภาพธุรกิจตัวเองชัดขึ้นเยอะ ขอบคุณคุณคิงจริงๆ ค่ะ"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/100x100/orange/white?text=A" alt="Avatar" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-bold">คุณอิม</p>
+                            <p class="text-sm text-gray-500">พนักงานออฟฟิศ</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 italic mb-4">"เป็น Challenge ที่ดีที่สุดที่เคยเข้าร่วมเลยครับ ได้ลงมือทำจริง ไม่ใช่แค่ฟังเฉยๆ ตอนนี้ผมเริ่มขายของล็อตแรกได้แล้ว!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/100x100/blue/white?text=B" alt="Avatar" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-bold">คุณบอย</p>
+                            <p class="text-sm text-gray-500">นักศึกษา</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FAQ -->
+        <section id="faq" class="py-16 px-6">
+            <!-- FAQ content as before -->
+        </section>
+        <!-- Final CTA -->
+        <section id="final-cta" class="text-center py-16 px-6 bg-blue-900 text-white rounded-t-xl">
+            <h2 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4">ถึงเวลาเปลี่ยนความฝันให้เป็นจริง</h2>
+            <p class="text-lg text-blue-200 max-w-2xl mx-auto mb-8">
+                สรุปสิ่งที่คุณจะได้รับทั้งหมด: Challenge 5 วันเต็ม, E-book บทพิเศษ, Checklist และสิทธิ์ในการเข้า Community ตลอดชีพ!
+            </p>
+            <p class="font-bold text-orange-400 mb-8">
+                ที่นั่งมีจำนวนจำกัด! ลงทะเบียนตอนนี้ ก่อนโอกาสนี้จะหลุดลอยไป!
+            </p>
+            <a href="https://gemini.google.com/share/de92a1ef86b5" class="cta-button inline-block bg-orange-500 text-white font-bold text-2xl px-12 py-5 rounded-lg shadow-lg">ลงทะเบียนเข้าร่วมฟรีทันที!</a>
+        </section>
+    </main>
+    <footer class="text-center py-6 text-gray-500 text-sm">
+        <p>&copy; 2025 DreamIgniter. All Rights Reserved.</p>
+    </footer>
+    <!-- Accordion Script -->
+    <script>
+        const accordions = document.querySelectorAll('.accordion-container');
+        accordions.forEach(container => {
+            container.addEventListener('click', e => {
+                const header = e.target.closest('.accordion-header');
+                if (!header) return;
+                const item = header.parentElement;
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+                const allItems = container.querySelectorAll('.accordion-item');
+                allItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        otherItem.querySelector('.accordion-icon').textContent = '+';
+                    }
+                });
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.textContent = '+';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = '-';
+                }
+            });
+        });
+        const analyzeButton = document.getElementById('analyze-button');
+        const ideaTextarea = document.getElementById('business-idea');
+        const geminiResultDiv = document.getElementById('gemini-result');
+        const loader = document.getElementById('loader');
+        const apiKey = ""; 
+        analyzeButton.addEventListener('click', async () => {
+            const userIdea = ideaTextarea.value.trim();
+            if (!userIdea) {
+                alert('กรุณาป้อนไอเดียธุรกิจของคุณก่อนครับ');
+                return;
+            }
+            loader.classList.remove('hidden');
+            geminiResultDiv.classList.add('hidden');
+            analyzeButton.disabled = true;
+            analyzeButton.classList.add('opacity-50', 'cursor-not-allowed');
+            const systemPrompt = `คุณคือที่ปรึกษาธุรกิจผู้เชี่ยวชาญและให้กำลังใจชื่อ 'ผู้ช่วยอัจฉริยะ' ของ DreamIgniter หน้าที่ของคุณคือการวิเคราะห์ไอเดียธุรกิจเบื้องต้นที่ผู้ใช้ส่งมา และให้ข้อเสนอแนะที่สร้างสรรค์และนำไปปฏิบัติได้จริงในภาษาไทย
+
+            กฏ:
+            1.  ใช้ภาษาที่เป็นมิตร ให้กำลังใจ และเข้าใจง่าย
+            2.  ตอบกลับเป็นโครงสร้าง HTML ที่ชัดเจนเสมอ
+            3.  เริ่มต้นคำตอบด้วย <h2>ผลการวิเคราะห์เบื้องต้นสำหรับไอเดียของคุณ:</h2>
+            4.  แบ่งเนื้อหาออกเป็น 4 ส่วน โดยใช้ <h3> สำหรับหัวข้อ: '🎯 กลุ่มลูกค้าเป้าหมายที่เป็นไปได้', '💡 จุดแข็งที่น่าสนใจ', '🤔 ข้อควรพิจารณา', และ '🚀 ก้าวแรกที่แนะนำ'
+            5.  ในแต่ละส่วน ให้ใช้ <ul> และ <li> สำหรับรายการย่อย 2-3 ข้อ
+            6.  สรุปจบด้วยย่อหน้า <p> ที่มีคลาส "mt-4 text-sm text-gray-600" เพื่อกระตุ้นให้ผู้ใช้เข้าร่วม Challenge: <em>"นี่เป็นเพียงการวิเคราะห์เบื้องต้นเท่านั้น! ใน Challenge 5 วันของเรา เราจะลงลึกในแต่ละส่วนนี้และเปลี่ยนไอเดียของคุณให้เป็นแผนธุรกิจที่จับต้องได้ เข้าร่วมกับเราสิ!"</em>`;
+            const userQuery = userIdea;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.statusText}`);
+                }
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    geminiResultDiv.innerHTML = candidate.content.parts[0].text;
+                    geminiResultDiv.classList.remove('hidden');
+                } else {
+                     throw new Error('ไม่ได้รับผลลัพธ์ที่ถูกต้องจาก AI');
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                geminiResultDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการวิเคราะห์ไอเดีย โปรดลองอีกครั้งในภายหลัง</p>`;
+                geminiResultDiv.classList.remove('hidden');
+            } finally {
+                loader.classList.add('hidden');
+                analyzeButton.disabled = false;
+                analyzeButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        });
+    </script>
+</body>
 </html>
